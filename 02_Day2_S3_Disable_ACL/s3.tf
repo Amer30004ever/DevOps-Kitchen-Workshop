@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "ForgTech_bucket" {
-  bucket = var.bucket-name
-  force_destroy = true #force destroy even if bucket is not empty
+  bucket = var.bucket_name
+  force_destroy = true  #force destroy even if bucket is not empty
   object_lock_enabled = false
   tags = {
     "Environment" = var.tags[0]
