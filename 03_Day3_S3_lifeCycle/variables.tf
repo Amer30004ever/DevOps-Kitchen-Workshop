@@ -9,3 +9,7 @@ variable "tags" {
 variable "region" {
   type = string
 }
+
+variable "transition" {
+  type = list(string)
+}

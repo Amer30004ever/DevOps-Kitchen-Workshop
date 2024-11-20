@@ -17,19 +17,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_1" {
       prefix = "/log"  # Apply to /log directory
     }
     transition {
-      days          = 30
-      storage_class = "STANDARD_IA"
+      days = var.transition.days[0]
+      storage_class = var.transition.storage_class[0]
     }
     transition {
-      days = 90
-      storage_class = "GLACIER"
+      days = var.transition.days[1]
+      storage_class = var.transition.storage_class[1]
     }
     transition {
-      days = 180
-      storage_class = "DEEP_ARCHIVE"
+      days = var.transition.days[2]
+      storage_class = var.transition.storage_class[2]
     }
     expiration {  #Remove files after 365 days
-      days = 365
+      days = var.transition.days[3]
     }
   }
 
@@ -45,12 +45,12 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_1" {
       }
     }
     transition {
-      days = 30
-      storage_class = "STANDARD_IA"
+      days = var.transition.days[0]
+      storage_class = var.transition.storage_class[0]
     }
     transition {
-      days = 90
-      storage_class = "GLACIER"
+      days = var.transition.days[1]
+      storage_class = var.transition.storage_class[1]
     }
   }
 
@@ -64,12 +64,12 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_1" {
       object_size_less_than = 1073741824 # 1GB
     }
     transition {
-      days = 30
-      storage_class = "STANDARD_IA"
+      days = var.transition.days[0]
+      storage_class = var.transition.storage_class[0]
     }
     transition {
-      days = 90
-      storage_class = "GLACIER"
+      days = var.transition.days[1]
+      storage_class = var.transition.storage_class[1]
     }
   }
 }

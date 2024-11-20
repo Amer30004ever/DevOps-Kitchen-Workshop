@@ -1,5 +1,5 @@
 resource "aws_s3_object" "log-dir" {
-  bucket = aws_s3_bucket.forgtech-bucket.id
+  bucket = aws_s3_bucket.ForgTech_bucket.id
   key = "log/"
   tags = {
     "Environment" = var.tags[0]
@@ -7,7 +7,7 @@ resource "aws_s3_object" "log-dir" {
   }
 }
 resource "aws_s3_object" "outgoing-dir" {
-  bucket = aws_s3_bucket.forgtech-bucket.id
+  bucket = aws_s3_bucket.ForgTech_bucket.id
   key = "outgoing/"
   tags = {
     "Environment" = var.tags[0]
@@ -15,7 +15,7 @@ resource "aws_s3_object" "outgoing-dir" {
   }
 }
 resource "aws_s3_object" "incoming-dir" {
-  bucket = aws_s3_bucket.forgtech-bucket.id
+  bucket = aws_s3_bucket.ForgTech_bucket.id
   key = "incoming/"
   tags = {
     "Environment" = var.tags[0]
