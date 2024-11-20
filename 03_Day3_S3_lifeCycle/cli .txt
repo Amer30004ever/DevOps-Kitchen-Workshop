@@ -1,0 +1,10 @@
+.\terraform.exe validate
+
+/*
+two ways to allow upload to /log using :
+  1-Bucket Policy for Allowing Uploads to /log by user Mohamed
+  2-Attach an inline user policy to allow Mohamed to upload files to the /log directory in s3 bucket
+*/
+
+
+.\terraform.exe fmt <--------format check
