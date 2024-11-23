@@ -49,6 +49,10 @@ resource "aws_iam_role" "iam_role_get_s3_Mahmoud" {
       }
     ]
   })
+  tags = {
+    "Environment" = var.tags[0]
+    "Owner"       = var.tags[1]
+  }
 }
 
 # Create S3 get policy document to give permissions to Mahmoud to read objects from existing S3 buckets.
@@ -74,33 +78,72 @@ data "aws_iam_policy_document" "s3_get_access_policy_document" {
 resource "aws_iam_policy" "holds_s3_get_policy" {
   name   = "holds_s3_get_policy"
   policy = data.aws_iam_policy_document.s3_get_access_policy_document.json
+  tags = {
+    "Environment" = var.tags[0]
+    "Owner"       = var.tags[1]
+  }
 }
 
 # attach s3 get policy to the role
 resource "aws_iam_role_policy_attachment" "attach_s3_get_role" {
   role       = aws_iam_role.iam_role_get_s3_Mahmoud.name
   policy_arn = aws_iam_policy.holds_s3_get_policy.arn
+  
 }
 
 # Mostafa: Internal user with S3 GetObject access
-data "aws_iam_policy_document" "Mostafa_get_access_policy_document" {
-  statement {
-    sid    = "116"
-    effect = "Allow"
-    actions = ["s3:GetObject"]
-    resources = [
-      aws_s3_bucket.ForgTech_bucket.arn,
-      "${aws_s3_bucket.ForgTech_bucket.arn}/*"
+resource "aws_iam_role" "mostafa_s3_role" {
+  name = "mostafa_s3_access_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Sid    = "AllowMostafaAssumeRole",
+        Effect = "Allow",
+        Principal = {
+          AWS = "arn:aws:iam::123456789012:user/Mostafa"
+        },
+        Action = "sts:AssumeRole"
+      }
     ]
+  })
+
+  tags = {
+    "Environment" = var.tags[0]
+    "Owner"       = var.tags[1]
   }
 }
 
-resource "aws_iam_policy" "Mostafa_get_policy" {
-  name   = "Mostafa_get_policy"
-  policy = data.aws_iam_policy_document.Mostafa_get_access_policy_document.json
+
+# Managed Policy for Mostafa
+resource "aws_iam_policy" "mostafa_s3_policy" {
+  name = "mostafa_s3_policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Sid      = "AllowS3GetObject",
+        Effect   = "Allow",
+        Action   = ["s3:GetObject"],
+        Resource = [
+          aws_s3_bucket.ForgTech_bucket.arn,
+          "${aws_s3_bucket.ForgTech_bucket.arn}/*"
+        ]
+      }
+    ]
+  })
+
+  tags = {
+    Environment = var.tags["Environment"]
+    Owner       = var.tags["Owner"]
+  }
 }
 
-resource "aws_iam_user_policy_attachment" "Mostafa_policy" {
-  user       = aws_iam_user.Mostafa.name
-  policy_arn = aws_iam_policy.Mostafa_get_policy.arn
+
+# Attach the Managed Policy to the Role
+resource "aws_iam_role_policy_attachment" "mostafa_policy_attachment" {
+  role       = aws_iam_role.mostafa_s3_role.name
+  policy_arn = aws_iam_policy.mostafa_s3_policy.arn
 }
