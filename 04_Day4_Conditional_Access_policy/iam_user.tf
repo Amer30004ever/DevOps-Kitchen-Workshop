@@ -92,22 +92,21 @@ resource "aws_iam_role_policy_attachment" "attach_s3_get_role" {
 }
 
 # Mostafa: Internal user with S3 GetObject access
-resource "aws_iam_role" "mostafa_s3_role" {
-  name = "mostafa_s3_access_role"
+#Mostafa as an internal user and his team delegated to fetching files, with IAM Role holds the get-objects policy
+resource "aws_iam_role" "Mostafa_s3_role" {
+  name = "Mostafa_s3_access_role"
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Sid    = "AllowMostafaAssumeRole",
-        Effect = "Allow",
+  assume_role_policy = {
+    Version = "2012-10-17"
+    Statement = {
+        Sid    = "AllowMostafaAssumeRole"
+        Effect = "Allow"
+        Action = "sts:AssumeRole"
         Principal = {
           AWS = "arn:aws:iam::123456789012:user/Mostafa"
-        },
-        Action = "sts:AssumeRole"
+        }
       }
-    ]
-  })
+  }
 
   tags = {
     "Environment" = var.tags[0]
@@ -117,8 +116,8 @@ resource "aws_iam_role" "mostafa_s3_role" {
 
 
 # Managed Policy for Mostafa
-resource "aws_iam_policy" "mostafa_s3_policy" {
-  name = "mostafa_s3_policy"
+resource "aws_iam_policy" "Mostafa_s3_policy" {
+  name = "Mostafa_s3_policy"
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -143,7 +142,7 @@ resource "aws_iam_policy" "mostafa_s3_policy" {
 
 
 # Attach the Managed Policy to the Role
-resource "aws_iam_role_policy_attachment" "mostafa_policy_attachment" {
-  role       = aws_iam_role.mostafa_s3_role.name
-  policy_arn = aws_iam_policy.mostafa_s3_policy.arn
+resource "aws_iam_role_policy_attachment" "Mostafa_policy_attachment" {
+  role       = aws_iam_role.Mostafa_s3_role.name
+  policy_arn = aws_iam_policy.Mostafa_s3_policy.arn
 }
