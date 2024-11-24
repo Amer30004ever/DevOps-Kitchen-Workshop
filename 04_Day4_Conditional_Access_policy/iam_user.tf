@@ -92,14 +92,15 @@ resource "aws_iam_role" "Mahmoud_assume_role" {
 }
 # 
 # Create S3 get policy document to give permissions to Mahmoud to read objects from existing S3 bucket restricting access to S3 bucket with a condition for specific IPs.
+# This allows the policy to grant permissions specifically for this bucket
 data "aws_iam_policy_document" "s3_get_object_policy_document" {
   statement {
     sid    = "115"
     effect = "Allow"
-    actions = ["s3:GetObject"]
-    resources = [
-      aws_s3_bucket.ForgTech_bucket.arn,
-      "${aws_s3_bucket.ForgTech_bucket.arn}/*"
+    actions = ["s3:GetObject"] 
+resources = [
+    aws_s3_bucket.ForgTech_bucket.arn,     # the S3 bucket named ForgTech_bucket 
+    "${aws_s3_bucket.ForgTech_bucket.arn}/*"  # all objects within the ForgTech_bucket
                 ] 
     condition {
       test     = "IpAddress"
@@ -182,6 +183,6 @@ resource "aws_iam_policy" "Mostafa_s3_policy" {
 
 # Attach the Managed Policy to the Role
 resource "aws_iam_role_policy_attachment" "Mostafa_policy_attachment" {
-  role       = aws_iam_role.Mostafa_s3_role.name
+  role       = aws_iam_role.Mostafa_assume_role.name
   policy_arn = aws_iam_policy.Mostafa_s3_policy.arn
 }
