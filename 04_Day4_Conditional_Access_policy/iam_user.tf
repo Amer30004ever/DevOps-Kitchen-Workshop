@@ -126,7 +126,7 @@ resource "aws_iam_role_policy_attachment" "attach_s3_get_role" {
   
 }
 
-# Mostafa: 
+# Mostafa Policy: 
 /*
 Mostafa’s IAM Policy:
 On the other hand, Mostafa's policy is simpler because he is an internal user, 
