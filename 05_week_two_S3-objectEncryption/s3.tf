@@ -54,7 +54,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle" {
         id     = "expiration"
         status = "Enabled"
         filter {
-            prefix = "commit_logs/"
+            prefix = "commit_logs/" # This prefix setting specifies that the lifecycle rule only applies to objects in the 
+                                    # "commit_logs/" folder within the S3 bucket. Objects outside this prefix are not affected
+                                    # by the expiration rule.
         }
         expiration {
             days = 7
