@@ -2,7 +2,7 @@ ForgTech company wanna test your ability to type down a clean code by Deploying
 the structure of resources. This will help you to build a good reputation.
 
 FrogTech Developer team intends to use object storage to save temporary data for 
-7 days, these Data consist of git commit logs changeson their local repositories. 
+7 days, these Data consist of git commit logs changes on their local repositories. 
 The developers will push the log files automatically to The S3 from an EC2 machine 
 via VPC endpoint.
 
