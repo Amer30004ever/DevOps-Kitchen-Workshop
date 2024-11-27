@@ -93,6 +93,8 @@ resource "aws_iam_role_policy_attachment" "ec2_s3_full_access_backend" {
   policy_arn = aws_iam_policy.S3FullAccessPolicy_backend_bucket.arn
   role       = aws_iam_role.ForgTech_bucket_access_role.name
 }
+
+# root_user_policy
 # converts json policy document into arn for "root" user 
 # Add a policy for the root user (xx in production)
 resource "aws_iam_policy_attachment" "root_S3FullAccess_ForgTech_bucket" {
