@@ -19,6 +19,7 @@ resource "aws_s3_bucket_acl" "backend_bucket_acl" {
             }
             permission = "FULL_CONTROL"
         }
+        
         owner {
             id = data.aws_canonical_user_id.Owner.id
         }

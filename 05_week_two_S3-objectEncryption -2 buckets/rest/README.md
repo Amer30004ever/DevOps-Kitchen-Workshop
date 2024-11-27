@@ -33,7 +33,3 @@ Bouns
 References:
 Week two workshop code samples - Lama
 https://github.com/Lamaalmassry/Terraform-champs/tree/main/Week%20Two%20Workshop
-
-Steps:
-------
-1-

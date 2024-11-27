@@ -1,8 +1,7 @@
-/*
+
 data "aws_canonical_user_id" "Owner" {
   depends_on = [aws_s3_bucket.ForgTech_bucket, aws_s3_bucket.backend_bucket]
 }
-*/
 
 # ForgTech_bucket_policy
 
@@ -37,7 +36,7 @@ data "aws_iam_policy_document" "S3FullAccess_document_ForgTech_bucket" {
     ]
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_role.ForgTech_bucket_access_role.arn]  # Grant access to the EC2 instance role
+      identifiers = [aws_iam_role.ec2_role.arn]  # Grant access to the EC2 instance role
     }
   }
 }
@@ -94,6 +93,8 @@ resource "aws_iam_role_policy_attachment" "ec2_s3_full_access_backend" {
   policy_arn = aws_iam_policy.S3FullAccessPolicy_backend_bucket.arn
   role       = aws_iam_role.ForgTech_bucket_access_role.name
 }
+
+# root_user_policy
 # converts json policy document into arn for "root" user 
 # Add a policy for the root user (xx in production)
 resource "aws_iam_policy_attachment" "root_S3FullAccess_ForgTech_bucket" {

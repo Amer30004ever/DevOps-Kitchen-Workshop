@@ -1,0 +1,108 @@
+export AWS_SECRET_ACCESS_KEY=
+export AWS_ACCESS_KEY_ID= #will be refreshed on next #terraform command
+export TF_VAR_avail_zone=""eu-west-3a
+env | grep AWS
+
+aws configure
+    AWS Access Key ID [****************KVP3]: 
+    AWS Secret Access Key [****************gvfc]: 
+    Default region name [eu-central-1]: 
+    Default output format [None]: 
+
+aws configure list
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------   
+    profile                <not set>             None    None       
+    access_key     ****************KVP3 shared-credentials-file        
+    secret_key     ****************gvfc shared-credentials-file        
+    region             eu-central-1      config-file    ~/.aws/conf
+
+
+.\terraform.exe plan
+.\terraform.exe apply
+.\terraform.exe apply -auto-approve
+.\terraform.exe destroy
+.\terraform.exe destroy -auto-approve
+.\terraform.exe state
+   Subcommands:
+      list                List resources in the state
+      mv                  Move an item in the state
+      pull                Pull current state and output to stdout
+      push                Update remote state from a local state file
+      replace-provider    Replace provider in the state
+      rm                  Remove instances from the state
+      show                Show a resource in the state
+
+.\terraform.exe state list
+    data.aws_vpc.existing_vpc
+    aws_subnet.public-subnet-1
+    aws_subnet.public-subnet-2
+    aws_vpc.development_vpc
+
+.\terraform.exe state show aws_subnet.public-subnet-1
+# aws_subnet.public-subnet-1:
+resource "aws_subnet" "public-subnet-1" {
+    arn                                            = "arn:aws:ec2:eu-west-3:533266962848:subnet/subnet-065cf43931d8354f4"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "eu-west-3a"
+    availability_zone_id                           = "euw3-az1"
+    cidr_block                                     = "10.0.10.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-065cf43931d8354f4" 
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = true
+    outpost_arn                                    = null
+    owner_id                                       = "533266962848"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags_all                                       = {}
+    vpc_id                                         = "vpc-0c781ad92cc1f0b9a"    
+}
+
+.\terraform.exe apply -var "subnet_cidr_block=10.0.30.0/24"
+.\terraform.exe apply -var-file terraform-dev.tfvars
+.\terraform.exe apply -var-file terraform-dev.tfvars -auto-approve
+.\terraform.exe destroy -var-file terraform-dev.tfvars -auto-approve
+
+.\terraform.exe apply -var-file terraform-dev.tfvars -var "avail_zone=eu-west-3a" -auto-approve
+.\terraform.exe destroy -var-file terraform-dev.tfvars -var "avail_zone=eu-west-3a" -auto-approve
+
+git:
+---
+configure
+---------
+git config --global user.name "Nana Janashia"
+git config --global user.email "nn_janashia@yahoo.com"
+
+Create a new repository
+----------------------
+git clone git@gitlab.com:nanuchi/terraform-learn.git
+cd terraform-learn
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+
+Push an existing folder
+-----------------------
+cd existing_folder
+git init
+git remote add origin git@gitlab.com:nanuchi/terraform-learn.git
+git add
+git commit -m "Initial commit"
+git push -u origin master
+
+Push an existing Git repository
+------------------------------
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@gitlab.com:nanuchi/terraform-learn.git
+git push -u origin --all
+git push -u origin --tags
+
