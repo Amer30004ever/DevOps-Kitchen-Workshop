@@ -1,0 +1,17 @@
+1-create provider.tf
+2-create s3.tf
+3-create variables.tf
+4-terraform init
+5-terraform plan
+6-terraform apply --auto-approve
+7-create backend-state.tf
+8-terraform init
+9-terraform plan
+10-terraform apply --auto-approve
+
+to delete log_bucket
+-------------------
+move away or remove backend-state.tf
+terraform init -migrate-state
+terraform init -reconfigure
+terraform destroy --auto-approve
