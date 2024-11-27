@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:PutBucketPolicy",
+                "s3:PutBucketOwnershipControls",
+                "s3:PutBucketTagging",
+                "s3:PutBucketVersioning",
+                "s3:PutEncryptionConfiguration",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:DeleteBucket",
+                "s3:ListBucket"
+            ],
+            "Resource": "arn:aws:s3:::*"
+        }
+    ]
+}
