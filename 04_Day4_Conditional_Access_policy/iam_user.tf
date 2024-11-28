@@ -30,12 +30,11 @@ resource "aws_iam_user" "Mostafa" {
 # It uses the aws_iam_policy_document data source to create a JSON policy document
 # This policy will be used to create an IAM policy that can be attached to IAM users/roles
 data "aws_iam_policy_document" "S3FullAccess" {
-  version = "2012-10-17"
   statement {
     effect    = "Allow"
     actions   = ["s3:*"]
     resources = [
-      aws_s3_bucket.ForgTech_bucket.arn,
+      "${aws_s3_bucket.ForgTech_bucket.arn}",
       "${aws_s3_bucket.ForgTech_bucket.arn}/*"
     ]  
   }
