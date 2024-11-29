@@ -1,6 +1,6 @@
 #ec2 full access on s3 bucket
 resource "aws_iam_role" "ec2_access_role" {
-    name = "ec2_full_access_s3"
+    name = "ec2_access_role"
     assume_role_policy = jsonencode ({
         Version = "2012-10-17"
         Statement = [

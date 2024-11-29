@@ -13,7 +13,7 @@ data "aws_ami" "latest-amazon-linux-image" {
 
 resource "aws_instance" "app-server" {
   ami = data.aws_ami.latest-amazon-linux-image.id
-  instance_type = "$(var.instance_type)"
+  instance_type = var.instance_type
   subnet_id = aws_subnet.ForgTech_log_bucket_subnet.id
   associate_public_ip_address = true
   tags = var.common_tags
