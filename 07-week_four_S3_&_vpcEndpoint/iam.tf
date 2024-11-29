@@ -19,7 +19,7 @@ resource "aws_iam_role" "ec2_access_role" {
 data "aws_iam_policy_document" "s3_full_access_document" {
     statement {
       actions = ["s3:*"]
-      resources = ["${aws_s3_bucket.ForgTech_logs.arn}"]
+      resources = ["${aws_s3_bucket.ForgTech_log_bucket.arn}"]
     }
 }
 

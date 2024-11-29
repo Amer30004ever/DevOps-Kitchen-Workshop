@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "ForgTech_log_bucket" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "ForgTech_log_bucket_ownership" {
-    bucket = aws_s3_bucket.ForgTech_bucket.id
+    bucket = aws_s3_bucket.ForgTech_log_bucket.id
     rule {
         object_ownership = "BucketOwnerEnforced" #the bucket owner owns all the objects
     }
