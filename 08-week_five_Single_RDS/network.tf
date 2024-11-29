@@ -1,30 +1,34 @@
-resource "aws_vpc" "name" {
+resource "aws_vpc" "ForgTech_vpc" {
     cidr_block = var.cidr_block.vpc
+    tags = var.tags
 }
 
-resource "aws_subnet" "name" {
-    cidr_block = var.cidr_block.aws_subnet
-    vpc_id = aws_vpc.vpc.id
+resource "aws_subnet" "ForgTech_subnet" {
+    cidr_block = var.cidr_block.subnet
+    vpc_id = aws_vpc.ForgTech_vpc.id
+    tags = var.tags
 }
 
-resource "aws_security_group" "name" {
+resource "aws_security_group" "ForgTech_sg" {
     name = "allow-all"
-    vpc_id = aws_vpc.vpc.id
+    vpc_id = aws_vpc.ForgTech_vpc.id
     ingress {
-        from_port = 5432
-        to_port = 5432
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
+        from_port = var.ingress_rules.from_port
+        to_port = var.ingress_rules.to_port
+        protocol = var.ingress_rules.protocol
+        cidr_blocks = var.ingress_rules.cidr_blocks
     }
     egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
+        from_port = var.egress_rules.from_port
+        to_port = var.egress_rules.to_port
+        protocol = var.egress_rules.protocol
+        cidr_blocks = var.egress_rules.cidr_blocks
     }
+    tags = var.tags
 }
 
-resource "aws_db_subnet_group" "name" {
+resource "aws_db_subnet_group" "ForgTech_subnet_group" {
     name = "subnet-group"
-    subnet_ids = [aws_subnet.name.id]
+    subnet_ids = [aws_subnet.ForgTech_subnet.id]
+    tags = var.tags
 }
