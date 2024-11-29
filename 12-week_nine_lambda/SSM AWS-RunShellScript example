@@ -1,0 +1,29 @@
+ {
+2 "schemaVersion": "2.2",
+3 "description": "Use this document to deploy and configure Linux Servers ",
+4 "mainSteps": [
+5 {
+6 "action": "aws:runShellScript",
+7 "name": "runShellScript",
+8 "precondition": {
+References:
+[AWS] Lambda - Invoke SSM + Terraform Project 07
+Terraform Tricks
+[AWS] Lambda Concepts Essentials
+Create dynamic expressions | Terraform | HashiCorp Developer
+https://github.com/Mohamed-Eleraki/terraform/tree/main/AWS_Demo/28-basic_conditionl_expression Can't find link
+9 "StringEquals": [
+10 "platformType",
+11 "Linux"
+12 ]
+13 },
+14 "inputs": {
+15 "runCommand": [
+16 "#!/bin/bash",
+17 "mkdir /testDir",
+18 "touch /testDir/testFile"
+19 ]
+20 }
+21 }
+22 ]
+23 }
