@@ -38,6 +38,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "lifecycle_1" {
     id = "ForgetTech_bucket_lifecycle_configuration_2"
     status = "Enabled"
     filter {
+      # The prefix parameter specifies a path prefix filter for the lifecycle rule
+      # Objects with keys that begin with this prefix will be affected by this rule
+      # For example, prefix = "/outgoing" means this rule applies to all objects in the /outgoing directory
       prefix = "/outgoing"  # Apply to /outgoing directory
       tag {
         key = "storage_class"

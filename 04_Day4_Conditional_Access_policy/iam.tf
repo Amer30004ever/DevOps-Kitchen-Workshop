@@ -12,6 +12,7 @@ resource "aws_iam_user" "Mahmoud" {
   tags = {
     "Environment" = var.tags[0]
     "Owner"       = var.tags[1]
+
   }
 }
 

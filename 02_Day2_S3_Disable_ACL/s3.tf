@@ -36,7 +36,6 @@ two ways to allow upload to /log using :
   2-Attach an inline user policy to allow Mohamed to upload files to the /log directory in s3 bucket
 */
 
-/*
 #Bucket Policy for Allowing Uploads to /log by user Mohamed
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.ForgTech_bucket.id
@@ -45,10 +44,10 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowUploadToLogDirectory"    # Statement ID (for identification)
-        Effect    = "Allow"                        # Allows the action (uploading objects)
+        Sid       = "AllowUploadToLogDirectory" 
+        Effect    = "Allow"  
         Principal = {
-          AWS = aws_iam_user.Mohamed.arn          # The IAM user Mohamed
+          AWS = "${aws_iam_user.Mohamed.arn}"          # The IAM user Mohamed
         }
         Action    = "s3:PutObject"                 # Permission to upload objects (PutObject)
         Resource  = "${aws_s3_bucket.ForgTech_bucket.arn}/log/*"  # Allows access only to the /log directory
@@ -56,4 +55,3 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     ]
   })
 }
-*/
