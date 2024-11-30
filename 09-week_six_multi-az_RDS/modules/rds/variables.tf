@@ -2,6 +2,11 @@ variable "vpc_id_rds" {}
 variable "cidr_block_rds_subnet" {
     default = "10.0.3.0/24"
 }
+
+variable "server_subnet" {
+    default = "10.0.2.0/24"
+}
+
 variable "aws_db_subnet_group_rds" {}
 variable "aws_db_intance" {
     default = {
@@ -20,5 +25,3 @@ variable "tags_all" {
         "Owner" = "Amer"
     }
 }
-
-variable "server_subnet_id_for_rds" {}

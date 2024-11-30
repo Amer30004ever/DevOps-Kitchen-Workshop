@@ -1,3 +1,16 @@
+data "aws_ami" "latest-amazon-linux-image" {
+    most_recent = true
+    owners = ["amazon"]
+    filter {
+      name = "name" #the name of the filter is the name of the AMI argument, which is name
+      values = ["amzn2-ami-kernel-*-x86_64-gp2"]
+    }
+    filter {
+      name = "virtualization-type"
+      values = ["hvm"]
+    }
+}
+
 resource "aws_instance" "app-server" {
     ami = data.aws_ami.latest-amazon-linux-image.id
     instance_type = var.instance_type

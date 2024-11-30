@@ -10,7 +10,7 @@ resource "aws_security_group" "rds_sg" {
         from_port = 5432
         to_port = 5432
         protocol = "tcp"
-        cidr_blocks = var.server_subnet_id_for_rds
+        cidr_blocks = ["${var.server_subnet}"]
     }
     egress = {
         from_port = 0

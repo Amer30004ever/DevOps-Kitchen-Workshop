@@ -6,9 +6,11 @@ resource "aws_db_instance" "name" {
     username = var.aws_db_intance.username
     password = var.aws_db_intance.password
     skip_final_snapshot = true
-    db_subnet_group_name = var.aws_db_subnet_group_rds
+    db_subnet_group_name = var.aws_db_subnet_group_rds.name
     vpc_security_group_ids = [aws_security_group.rds_sg.id]
     storage_encrypted = true
     multi_az = true
-    deletion_protection = true
+    deletion_protection = false
+    tags = var.tags_all
+
 }

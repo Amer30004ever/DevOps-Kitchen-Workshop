@@ -1,4 +1,4 @@
-resource "aws_subnet" "server_subnet" {
+resource "server_subnet_id_for_rds" "server_subnet" {
     vpc_id = var.vpc_id_server
     cidr_block = var.cidr_block_server_subnet
 }
