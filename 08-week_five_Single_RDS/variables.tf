@@ -42,8 +42,15 @@ variable "egress_rules" {
 variable "rds_orderable_db_instance" {
     default = {
         "engine" = "postgres"
-        "engine_version" = "15.*"
+        "engine_version" = "15.3"
         "instance_class" = "db.t3.micro"
     }
   
+}
+
+variable "db_instance" {
+    default = {
+        "username" = "testdb"
+        "password" = "secretpassword"
+    }
 }
