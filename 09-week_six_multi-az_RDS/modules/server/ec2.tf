@@ -5,6 +5,6 @@ resource "aws_instance" "app-server" {
     vpc_security_group_ids = [aws_security_group.server_sg.id]
     availability_zone = var.availability_zone
     associate_public_ip_address = true
-    user_data = file("../../entry-script.sh") 
+    user_data = file("psql-install.sh") 
     tags = var.tags_all
 }

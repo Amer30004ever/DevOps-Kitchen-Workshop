@@ -1,4 +1,7 @@
 variable "vpc_id_rds" {}
+variable "cidr_block_rds_subnet" {
+    default = "10.0.3.0/24"
+}
 variable "aws_db_subnet_group_rds" {}
 variable "aws_db_intance" {
     default = {
@@ -18,8 +21,4 @@ variable "tags_all" {
     }
 }
 
-variable "rds_subnet_cidr_block" {
-    default = "10.0.3.0/24"
-}
-
-variable "server_subnet_id_rds" {}
+variable "server_subnet_id_for_rds" {}

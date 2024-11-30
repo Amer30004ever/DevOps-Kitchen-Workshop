@@ -1,4 +1,7 @@
 variable "vpc_id_server" {}
+variable "cidr_block_server_subnet" {
+    default = "10.0.2.0/24"
+}
 variable "instance_type" { 
     default = "t2.micro"
 }
@@ -12,8 +15,4 @@ variable "tags_all" {
         "Environment" = "terraformChamps"
         "Owner" = "Amer"
     }
-}
-
-variable "server_subnet_id_server" {
-    default = "${aws_subnet.server_subnet}"
 }
