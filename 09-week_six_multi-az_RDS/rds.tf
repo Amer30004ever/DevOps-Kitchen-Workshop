@@ -6,11 +6,10 @@ resource "aws_db_instance" "name" {
     username = var.aws_db_intance.username
     password = var.aws_db_intance.password
     skip_final_snapshot = true
-    db_subnet_group_name = var.aws_db_subnet_group_rds.name
-    vpc_security_group_ids = [aws_security_group.rds_sg.id]
+    db_subnet_group_name = aws_db_subnet_group.ForgTech_subnet_group.name
+    vpc_security_group_ids = [aws_security_group.rds_sg.id, aws_security_group.server_sg.id]
     storage_encrypted = true
     multi_az = true
     deletion_protection = false
     tags = var.tags_all
-
 }
