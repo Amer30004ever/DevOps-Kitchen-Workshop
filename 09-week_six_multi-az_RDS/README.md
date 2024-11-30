@@ -21,8 +21,9 @@ specifications:
 and allows all outbound traffic.
 6. Set skip_final_snapshot as true.
 
-After provisioning the required Resources, Check the user accessibility utilizing the pgAdmin application or Psql client command line from
-the bastion host.
+After provisioning the required Resources, Check the user accessibility utilizing 
+the pgAdmin application or Psql client command line from the 
+bastion host.
 Use IaC Terraform to build all resources and consider the below requirements specifications.
 1. Resources must be created at the us-east-1 region.
 2. Store state file backend into S3.
