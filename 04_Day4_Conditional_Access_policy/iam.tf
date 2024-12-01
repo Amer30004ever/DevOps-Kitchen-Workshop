@@ -1,3 +1,4 @@
+# Ahmed: Internal user with S3 acces
 resource "aws_iam_user" "Ahmed" {
   name = var.iam_user[0]
   tags = {
@@ -16,6 +17,7 @@ resource "aws_iam_user" "Mahmoud" {
   }
 }
 
+# Mostafa: External user with restricted IP-based S3 acces
 resource "aws_iam_user" "Mostafa" {
   name = var.iam_user[2]
   tags = {
@@ -27,9 +29,6 @@ resource "aws_iam_user" "Mostafa" {
 
 # Ahmed Policy
 # AWS-managed policy AmazonS3FullAccess Directly used
-# This data source defines an IAM policy document that grants full access to S3
-# It uses the aws_iam_policy_document data source to create a JSON policy document
-# This policy will be used to create an IAM policy that can be attached to IAM users/roles
 data "aws_iam_policy_document" "S3FullAccess" {
   statement {
     effect    = "Allow"
@@ -59,15 +58,6 @@ resource "aws_iam_policy_attachment" "Ahmed_S3FullAccess" {
   policy_arn = aws_iam_policy.S3FullAccessPolicy.arn
 }
 # Mahmoud Policy
-/*
-Mahmoud’s IAM Policy:
-For Mahmoud, you are creating a custom IAM policy document (aws_iam_policy_document) 
-that grants s3:GetObject permission but with an IP restriction using a condition. 
-This policy restricts Mahmoud's access to only the specific IP address 41.45.34.102. 
-This requires creating a detailed custom IAM policy document in Terraform 
-using aws_iam_policy_document
-*/
-# custom policy 
 # Create IAM Role for Mahmoud to AssumeRole - (Consider it as external access)
 resource "aws_iam_role" "Mahmoud_assume_role" {
   name = "iam_role_assume_Mahmoud"
@@ -90,21 +80,19 @@ resource "aws_iam_role" "Mahmoud_assume_role" {
     "Owner"       = var.tags[1]
   }
 }
-# 
-# Create S3 get policy document to give permissions to Mahmoud to read objects from existing S3 bucket restricting access to S3 bucket with a condition for specific IPs.
-# This allows the policy to grant permissions specifically for this bucket
+# Create S3 get policy document
 data "aws_iam_policy_document" "s3_get_object_policy_document" {
   statement {
     sid    = "115"
     effect = "Allow"
     actions = ["s3:GetObject"] 
 resources = [
-    aws_s3_bucket.ForgTech_bucket.arn,     # the S3 bucket named ForgTech_bucket 
-    "${aws_s3_bucket.ForgTech_bucket.arn}/*"  # all objects within the ForgTech_bucket
+    aws_s3_bucket.ForgTech_bucket.arn,     # the S3 bucket
+    "${aws_s3_bucket.ForgTech_bucket.arn}/*"  # all objects within the bucket
                 ] 
     condition {
       test     = "IpAddress"
-      variable = "aws:SourceIp"   # Specifies that the action is allowed only if the request originates from the IP address 41.45.34.102.
+      variable = "aws:SourceIp"   
       values   = ["41.45.34.102"]
     }
   }
@@ -128,15 +116,6 @@ resource "aws_iam_role_policy_attachment" "attach_s3_get_role" {
 }
 
 # Mostafa Policy: 
-/*
-Mostafa’s IAM Policy:
-On the other hand, Mostafa's policy is simpler because he is an internal user, 
-and there is no need to add any specific conditions (like IP restrictions). 
-The IAM policy for Mostafa simply grants s3:GetObject permissions to fetch 
-objects from the S3 bucket. Since it’s a straightforward permission assignment 
-without any special conditions, you can define Mostafa's policy directly as 
-a managed policy (or inline policy).
-*/
 #Mostafa as an internal user and his team delegated to fetching (GetObject) files, with IAM Role holds the get-objects policy
 resource "aws_iam_role" "Mostafa_assume_role" {
   name = "Mostafa_s3_access_role"

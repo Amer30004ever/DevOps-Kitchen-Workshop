@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "ForgTech_bucket" {
   }
 }
 
-resource "aws_s3_bucket_versioning" "name" {
+resource "aws_s3_bucket_versioning" "ForgTech_bucket_versioning" {
   bucket = aws_s3_bucket.ForgTech_bucket.id
   versioning_configuration {
     status = "Enabled"
@@ -16,7 +16,7 @@ resource "aws_s3_bucket_versioning" "name" {
 }
 
 #Enable bucket ownership controls 
-resource "aws_s3_bucket_ownership_controls" "owner_ship_s3" {
+resource "aws_s3_bucket_ownership_controls" "ForgTech_bucket_owner_ship" {
   bucket = aws_s3_bucket.ForgTech_bucket.id
   rule {
     object_ownership = "BucketOwnerEnforced"
@@ -37,7 +37,7 @@ two ways to allow upload to /log using :
 */
 
 #Bucket Policy for Allowing Uploads to /log by user Mohamed
-resource "aws_s3_bucket_policy" "bucket_policy" {
+resource "aws_s3_bucket_policy" "ForgTech_bucket_policy" {
   bucket = aws_s3_bucket.ForgTech_bucket.id
 
   policy = jsonencode({

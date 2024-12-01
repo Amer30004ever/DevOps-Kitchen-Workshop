@@ -12,7 +12,7 @@ terraform.exe
 
 #cli .txt
 
-*.lock.*
+#*.lock.*
 
 #.gitignore
 
