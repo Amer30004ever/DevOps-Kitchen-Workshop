@@ -7,27 +7,30 @@ variable "tags" {
         "Owner" = "Amer"
     }
 }
-variable "cidr_block_rds_subnet" {
-    default = "10.0.3.0/24"
-}
-variable "cidr_block_server_subnet" {
+variable "cidr_block_subnet-1" {
     default = "10.0.2.0/24"
+}
+variable "cidr_block_subnet-2" {
+    default = "10.0.3.0/24"
 }
 variable "instance_type" { 
     default = "t2.micro"
 }
 
 variable "availability_zone" {
-    default = "us-east-1a"
+    default = {
+        "subnet-1" = "us-east-1a"
+        "subnet-2" = "us-east-1b"
+    }
 }
 
 variable "aws_db_intance" {
     default = {
         "allocated_storage" = "20"
         "engine" = "postgres"
-        "engine_version" = "15.3"
+        "engine_version" = "15.4"
         "instance_class" = "db.t3.micro"
-        "username" = "admin"
+        "username" = "postgres"
         "password" = "securepassword"
     }
   

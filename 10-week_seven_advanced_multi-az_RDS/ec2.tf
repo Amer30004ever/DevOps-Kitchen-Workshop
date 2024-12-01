@@ -11,13 +11,11 @@ data "aws_ami" "latest-amazon-linux-image" {
     }
 }
 
-resource "aws_instance" "bastion_host" {
+resource "aws_instance" "name" {
     ami = data.aws_ami.latest-amazon-linux-image.id
     instance_type = var.instance_type
-    subnet_id = aws_subnet.subnet-1.id
+    subnet_id = var.ForgTech_subnet.id
     vpc_security_group_ids = [aws_security_group.ForgTech_sg.id]
-    availability_zone = var.availability_zone.subnet-1
-    user_data = file("psql-install.sh")
-    #key_name = "forgtech-key.pem"
-    tags = var.tags_all
+    availability_zone = var.availability_zone.az-1
+    tags = var.ForgTech_tags
 }

@@ -15,3 +15,5 @@ terraform.exe
 *.lock.*
 
 .$D-S3 - S3 Bucket object encryption.drawio.bkp
+
+*.pem
