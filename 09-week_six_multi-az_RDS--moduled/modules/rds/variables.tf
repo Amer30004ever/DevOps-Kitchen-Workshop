@@ -24,3 +24,7 @@ variable "tags_all" {
         "Owner" = "Amer"
     }
 }
+
+variable "subnet_group" {
+    type = string
+}

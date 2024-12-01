@@ -5,14 +5,13 @@ resource "aws_subnet" "rds_subnet" {
 
 resource "aws_security_group" "rds_sg" {
     vpc_id = var.vpc_id_rds
-    ingress = {
-        
+    ingress  {
         from_port = 5432
         to_port = 5432
         protocol = "tcp"
         cidr_blocks = ["${var.server_subnet}"]
     }
-    egress = {
+    egress  {
         from_port = 0
         to_port = 0
         protocol = "-1"
