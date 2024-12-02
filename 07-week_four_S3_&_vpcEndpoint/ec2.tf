@@ -17,5 +17,4 @@ resource "aws_instance" "app-server" {
   subnet_id = aws_subnet.ForgTech_log_bucket_subnet.id
   associate_public_ip_address = true
   tags = var.common_tags
-
 }
