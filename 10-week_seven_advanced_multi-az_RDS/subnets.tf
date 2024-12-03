@@ -1,6 +1,6 @@
 resource "aws_subnet" "ForgTech_subnet" {
     vpc_id = aws_vpc.ForgTech_vpc.id
-    cidr_block = "10.0.1.0/24"
+    cidr_block = var.cidr_block.subnet
 }
 
 resource "aws_db_subnet_group" "ForgTech_subnet_group" {

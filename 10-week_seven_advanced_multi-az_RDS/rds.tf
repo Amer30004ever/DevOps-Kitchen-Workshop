@@ -1,4 +1,4 @@
-resource "aws_db_instance" "name" {
+resource "aws_db_instance" "ForgTech_db" {
     allocated_storage = var.db_instance.allocated_storage
     engine = var.db_instance.engine
     engine_version = var.db_instance.engine_version

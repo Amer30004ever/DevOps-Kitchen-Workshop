@@ -21,3 +21,11 @@ variable "db_instance" {
         "backup_retention_period" = 7
     }
 }
+
+variable "cidr_block" {
+    default = {
+        "subnet" = "10.0.1.0/24"
+        "vpc" = "10.0.0.0/16"
+    }
+  
+}
