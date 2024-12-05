@@ -22,8 +22,8 @@ Use IaC Terraform to build all resources and consider
 the below requirements specifications.
 1. Resources must be created at the us-east-1 region.
 2. Resources must have tags as below:
-a. Key: “Environment”, Value: “terraformChamps”
-b. Key: “Owner”, Value: <“Your_first_name“>
+a. Key: “Environment”, Value: "terraformChamps"
+b. Key: “Owner”, Value: "Amer"
 3. Preferd to use variables.
 Refrences:
 1. What is AWS Lambda? - AWS Lambda
