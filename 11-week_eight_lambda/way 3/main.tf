@@ -1,8 +1,3 @@
-
-#
-
-# Terraform resources
-
 # Source S3 bucket
 resource "aws_s3_bucket" "source" {
   bucket = "XXXXXXXXXXXXXXXXXXXX"

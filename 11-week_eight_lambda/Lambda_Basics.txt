@@ -1,0 +1,24 @@
+Introduction to AWS Lambda
+AWS Lambda is a serverless compute service that allows you to run code in response to events and automatically manages the compute resources for you. Here are some foundational concepts:
+
+1. Function Event
+An event is a JSON object that triggers the Lambda function. For example, in this case, the S3 PUT event will trigger the Lambda function whenever a file is uploaded to the frogtech-us-external bucket.
+
+2. Function Context
+The context is an object passed to the function by AWS Lambda at runtime. It provides metadata about the invocation, function configuration, and execution environment, such as:
+
+Function name.
+Memory limits.
+Remaining execution time.
+Log group and stream name.
+3. Function Environment Variables
+Environment variables store configuration values accessible to the Lambda function. These are useful for:
+
+Storing bucket names (frogtech-us-external and frogtech-us-internal).
+Configuring runtime parameters.
+4. Layers
+Lambda layers allow you to include additional code or libraries in your function without adding them to the deployment package. For instance, you can use a layer to add the boto3 library or custom utilities.
+
+5. Synchronous vs. Asynchronous Invocation
+Synchronous: The caller waits for the function to process the event and return a response.
+Asynchronous: The caller queues the event, and Lambda processes it without returning an immediate response. S3 events are asynchronous by default.
